@@ -417,6 +417,72 @@ section[id] {
   width: 100%;
 }
 
+/* About Us dropdown (Overview / Management Team) */
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown > .nav-link i {
+  font-size: 0.65rem;
+  margin-left: 0.2rem;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown:hover > .nav-link i,
+.nav-dropdown:focus-within > .nav-link i {
+  transform: rotate(180deg);
+}
+
+.nav-submenu {
+  position: absolute;
+  top: calc(100% + 0.9rem);
+  left: -1rem;
+  min-width: 210px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  border-top: 3px solid var(--accent-yellow);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-xl);
+  padding: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: var(--transition-fast);
+}
+
+/* Invisible bridge so the menu doesn't close while the mouse crosses the gap */
+.nav-submenu::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1rem;
+  height: 1rem;
+}
+
+.nav-dropdown:hover .nav-submenu,
+.nav-dropdown:focus-within .nav-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.nav-sublink {
+  display: block;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.nav-sublink:hover,
+.nav-sublink.active {
+  background: var(--accent-yellow-light);
+  color: var(--primary-navy);
+}
+
 .nav-actions {
   display: flex;
   align-items: center;
@@ -594,6 +660,8 @@ section[id] {
 /* Hero Visual & Poster Card */
 .hero-visual-card {
   position: relative;
+  max-width: 420px; /* tall poster: cap width so it does not tower over the text */
+  justify-self: center;
 }
 
 .poster-wrapper {
@@ -684,7 +752,7 @@ section[id] {
    ========================================================================== */
 .stats-strip {
   background: #FFFFFF;
-  margin-top: -3rem;
+  margin-top: 3.5rem; /* was -3rem: pulled the box over the hero poster and contact strip */
   position: relative;
   z-index: 10;
   border-radius: var(--radius-lg);
@@ -939,6 +1007,76 @@ section[id] {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.75rem;
+}
+
+/* ==========================================================================
+   MANAGEMENT TEAM
+   ========================================================================== */
+.management-section {
+  background: linear-gradient(135deg, var(--primary-navy-dark) 0%, var(--primary-navy) 100%);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.75rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.team-card {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border-top: 4px solid var(--accent-yellow);
+  padding: 2.25rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-card:hover {
+  transform: translateY(-6px);
+}
+
+.team-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--primary-navy);
+  color: var(--accent-yellow);
+  font-size: 1.85rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 0 0 6px var(--accent-yellow-light);
+}
+
+.team-card h4 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary-navy);
+}
+
+.team-role {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-blue);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 0.3rem 0 1.5rem;
+  flex-grow: 1;
+}
+
+.team-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
 }
 
 /* ==========================================================================
@@ -1360,7 +1498,7 @@ section[id] {
 
 .safety-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr; /* visuals removed; text only */
   gap: 3.5rem;
   align-items: center;
 }
@@ -1444,7 +1582,8 @@ section[id] {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 380px)); /* centers however many posters there are */
+  justify-content: center;
   gap: 1.75rem;
 }
 
@@ -1467,8 +1606,7 @@ section[id] {
 
 .gallery-card-img {
   width: 100%;
-  height: 380px;
-  object-fit: cover;
+  height: auto; /* posters carry text edge to edge: never crop them */
   display: block;
 }
 
@@ -2139,6 +2277,35 @@ textarea.form-control {
     visibility: visible;
   }
 
+  /* In the sidebar the About sub-pages are always listed, indented */
+  .nav-dropdown > .nav-link i {
+    display: none;
+  }
+
+  .nav-submenu {
+    position: static;
+    opacity: 1;
+    visibility: inherit;
+    transform: none;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    border-left: 2px solid var(--accent-yellow);
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 0.75rem;
+    padding: 0 0 0 0.75rem;
+  }
+
+  .nav-submenu::before {
+    display: none;
+  }
+
+  .nav-sublink {
+    padding: 0.4rem 0.5rem;
+    background: transparent;
+  }
+
   /* Browsers without blur: plain white so links stay readable */
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     .nav-menu {
@@ -2184,7 +2351,7 @@ textarea.form-control {
   }
   
   .hero-visual-card {
-    max-width: 480px;
+    max-width: 360px;
     margin: 0 auto;
   }
   
@@ -2365,5 +2532,33 @@ textarea.form-control {
 
   .pillars-grid, .services-grid, .products-grid, .gallery-grid, .testimonials-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Product photo thumbnails (photo already carries its own title banner) */
+/* Same box size on every card (photo or icon) so titles line up across a row */
+.product-thumb {
+  aspect-ratio: 5 / 6;
+}
+.product-thumb:has(.product-thumb-img) {
+  padding: 0;
+  background: #E2E8F0;
+}
+.product-thumb-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top; /* keep the title banner at the top of each photo */
+}
+.product-thumb:has(.product-thumb-img) .product-badge {
+  top: auto;
+  bottom: 12px;
+}
+
+/* Single-column phones: no row to line up with, so the icon-only card need not be photo-tall */
+@media (max-width: 600px) {
+  .product-thumb:not(:has(.product-thumb-img)) {
+    aspect-ratio: auto;
   }
 }

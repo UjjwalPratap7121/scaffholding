@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Mobile Menu Toggle
   const mobileToggle = document.getElementById('mobileToggle');
   const navMenu = document.getElementById('navMenu');
-  const navLinks = document.querySelectorAll('.nav-link');
+  const navLinks = document.querySelectorAll('.nav-link, .nav-sublink');
 
   if (mobileToggle && navMenu) {
     mobileToggle.addEventListener('click', () => {
@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update WhatsApp Direct Link with dynamic quote request
     if (calcWhatsappBtn) {
       const msg = `Hello DP Infra Solutions, I used your online scaffolding calculator.\n\n*Project Details:*\n- Type: ${typeLabel}\n- Built-up Area: ${area} sq.ft\n- Height: ${height} meters\n- Duration: ${duration} months\n- Estimated Tonnage: ~${approxTons} Tons\n- Estimated Rent: ~₹${totalRentEst} total\n\nPlease provide your official quote and availability for delivery.`;
-      calcWhatsappBtn.href = `https://wa.me/919275294224?text=${encodeURIComponent(msg)}`;
+      calcWhatsappBtn.href = `https://wa.me/916397265630?text=${encodeURIComponent(msg)}`;
     }
   }
 
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const waText = `Hello DP Infra Solutions,%0A%0A*New Inquiry from Website:*%0A- *Name:* ${encodeURIComponent(name)}%0A- *Mobile:* ${encodeURIComponent(phone)}%0A- *Email:* ${encodeURIComponent(email)}%0A- *Site Location:* ${encodeURIComponent(location)}%0A- *Requirement:* ${encodeURIComponent(reqType)}%0A- *Message:* ${encodeURIComponent(message)}`;
 
       // Open synchronously: a delayed window.open loses the click and gets popup-blocked (esp. iPhone Safari)
-      window.open(`https://wa.me/919275294224?text=${waText}`, '_blank');
+      window.open(`https://wa.me/916397265630?text=${waText}`, '_blank');
       showToast("Thank you! Opening WhatsApp to send your requirement to DP Infra Solutions...");
       contactForm.reset();
     });
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const waText = `Hello DP Infra Solutions,%0A%0A*Product Inquiry:*%0A- *Product:* ${encodeURIComponent(prod)}%0A- *Deal Type:* ${encodeURIComponent(type)}%0A- *Quantity/Details:* ${encodeURIComponent(qty)}%0A- *Customer Name:* ${encodeURIComponent(name)}%0A- *Contact:* ${encodeURIComponent(phone)}`;
 
-      window.open(`https://wa.me/919275294224?text=${waText}`, '_blank');
+      window.open(`https://wa.me/916397265630?text=${waText}`, '_blank');
       showToast("Redirecting to WhatsApp to send product inquiry...");
       if (inquiryModal) inquiryModal.classList.remove('active');
       modalForm.reset();
