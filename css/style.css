@@ -551,7 +551,7 @@ section[id] {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1fr; /* wide poster sits below the text, full width */
   align-items: center;
   gap: 3.5rem;
 }
@@ -660,7 +660,8 @@ section[id] {
 /* Hero Visual & Poster Card */
 .hero-visual-card {
   position: relative;
-  max-width: 420px; /* tall poster: cap width so it does not tower over the text */
+  width: 100%;
+  max-width: 1000px; /* 16:9 poster */
   justify-self: center;
 }
 
@@ -899,6 +900,12 @@ section[id] {
   position: relative;
 }
 
+.about-card-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .about-main-img-wrap {
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -1017,14 +1024,16 @@ section[id] {
 }
 
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: flex; /* flex so a short last row is centered, not left-aligned */
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1.75rem;
   max-width: 1100px;
   margin: 0 auto;
 }
 
 .team-card {
+  flex: 0 1 320px;
   background: #FFFFFF;
   border-radius: var(--radius-lg);
   border-top: 4px solid var(--accent-yellow);
@@ -1582,7 +1591,7 @@ section[id] {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 380px)); /* centers however many posters there are */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 460px)); /* centers however many posters there are */
   justify-content: center;
   gap: 1.75rem;
 }
@@ -1606,7 +1615,9 @@ section[id] {
 
 .gallery-card-img {
   width: 100%;
-  height: auto; /* posters carry text edge to edge: never crop them */
+  aspect-ratio: 3 / 4; /* wider, shorter preview of the 9:16 posters; full poster opens in the lightbox */
+  object-fit: cover;
+  object-position: center 6%; /* keep logo + headline, trim the bottom strip */
   display: block;
 }
 
@@ -2351,7 +2362,6 @@ textarea.form-control {
   }
   
   .hero-visual-card {
-    max-width: 360px;
     margin: 0 auto;
   }
   
@@ -2525,10 +2535,6 @@ textarea.form-control {
     grid-column: span 1;
   }
 
-  /* Show posters & business card whole on phones instead of cropping them */
-  .gallery-card-img {
-    height: auto;
-  }
 
   .pillars-grid, .services-grid, .products-grid, .gallery-grid, .testimonials-grid {
     grid-template-columns: 1fr;
@@ -2560,5 +2566,43 @@ textarea.form-control {
 @media (max-width: 600px) {
   .product-thumb:not(:has(.product-thumb-img)) {
     aspect-ratio: auto;
+  }
+}
+
+/* Supply locations highlight band */
+.supply-band {
+  padding: 1rem 0 2rem;
+}
+.supply-box {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--accent-yellow-light);
+  border-left: 6px solid var(--accent-yellow);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 2rem;
+}
+.supply-icon {
+  font-size: 2.5rem;
+  color: var(--primary-navy);
+  flex-shrink: 0;
+}
+.supply-box h3 {
+  color: var(--primary-navy);
+  font-size: 1.35rem;
+  margin-bottom: 0.4rem;
+}
+.supply-box p {
+  color: var(--text-main);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0;
+}
+@media (max-width: 600px) {
+  .supply-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1.25rem;
   }
 }
